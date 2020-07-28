@@ -1,0 +1,22 @@
+{
+  "name": "hexo-calendar",
+  "version": "1.0.0",
+  "description": "Insert a calendar like Github contributions into your hexo blog.",
+  "keywords": [
+    "helper",
+    "plugin",
+    "tag",
+    "calendar",
+    "hexo"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "HCLonely",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HCLonely/hexo-calendar.git"
+  },
+  "license": "MIT"
+}
