@@ -5,15 +5,9 @@ const counts = (arr, value) => arr.reduce((a, v) => v === value ? a + 1 : a + 0,
 hexo.extend.helper.register('calendar', function (options) {
   return generateChart(options)
 })
-hexo.extend.tag.register('calendar', function (args) {
-  const options = {}
-  for (const e of args) {
-    let [key, value] = e.split('=')
-    if (['monthLang', 'dayLang'].includes(key) && value.includes(',')) value = value.split(',')
-    options[key] = value
-  }
-  return generateChart(options)
-})
+hexo.extend.tag.register('calendar', function (args, content) {
+  return generateChart(JSON.parse(content))
+}, { ends: true })
 function generateChart (options) {
   const { width, height, id, monthLang, dayLang, weeks, title, insertScript } = Object.assign({ width: '600', height: '185', id: 'calendar', monthLang: 'en', dayLang: 'en', weeks: 40, title: 'Calendar', insertScript: true }, options)
   return `
