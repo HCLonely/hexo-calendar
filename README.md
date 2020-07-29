@@ -41,6 +41,10 @@ cnpm i hexo-calendar -S
 {% endcalendar %}
 ```
 
+### If you use automatic deployment
+
+If you use automatic deployment such as `Travis CI`, `Github Action`, then you need to use the `hexo gc -w=40` command to generate a `calendar.json` file before pushing the source code. `-w=40` means to display activity records from 40 weeks ago to the present.
+
 ## Options
 
 | Name | Type | Default value | Description |

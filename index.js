@@ -1,17 +1,49 @@
 const { execSync } = require('child_process')
+const fs = require('hexo-fs')
+const path = require('path')
+const log = require('hexo-log')({
+  debug: false,
+  silent: false
+})
 
 const counts = (arr, value) => arr.reduce((a, v) => v === value ? a + 1 : a + 0, 0)
 
 hexo.extend.helper.register('calendar', function (options) {
   return generateChart(options)
 })
+
 hexo.extend.tag.register('calendar', function (args, content) {
   return generateChart(JSON.parse(content))
 }, { ends: true })
-function generateChart (options) {
-  const { width, height, id, monthLang, dayLang, weeks, title, insertScript } = Object.assign({ width: '600', height: '185', id: 'calendar', monthLang: 'en', dayLang: 'en', weeks: 40, title: 'Calendar', insertScript: true }, options)
+
+hexo.extend.console.register('gc', 'Generate calendar.json', function (args) {
+  const dataDir = path.join(this.source_dir, '_data')
+  if (!fs.existsSync(dataDir)) {
+    log.info('Creat dir ' + dataDir)
+    fs.mkdirsSync(dataDir)
+  }
+  fs.writeFile(path.join(dataDir, 'calendar.json'), getCommitData(args.w), err => {
+    if (err) {
+      log.error('Failed to write data to calendar.json')
+      console.error(err)
+    } else {
+      log.info('calendar.json has been saved')
+    }
+  })
+})
+
+function generateChart(options) {
+  const { width, height, id, monthLang, dayLang, weeks, title, insertScript } = Object.assign({ width: '600', height: '165', id: 'calendar', monthLang: 'en', dayLang: 'en', weeks: 40, title: 'Calendar', insertScript: true }, options)
+  let commitData = '[]'
+  if (fs.existsSync(path.join(hexo.source_dir, '_data/calendar.json'))) {
+    commitData = fs.readFileSync(path.join(hexo.source_dir, '_data/calendar.json')).toString()
+  } else {
+    commitData = getCommitData(weeks)
+  }
   return `
+<div style="width:100%;overflow-x:auto;overflow-y:hidden;">
 <div id="${id}" style="width: ${width}px;height:${height}px;"></div>
+</div>
   ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>' : ''}
   <script type="text/javascript">
     function dateFormat(date){
@@ -24,7 +56,7 @@ function generateChart (options) {
     let startDay = Math.ceil(startDate/(24*3600*1000))
     let endDay = Math.ceil(endDate/(24*3600*1000))
 
-    let commitData = ${getCommitData(weeks)}
+    let commitData = ${commitData}
     let seriesData = []
 
     for(let i = startDay;i <= endDay;i++){
@@ -109,7 +141,7 @@ function generateChart (options) {
   </script>
 `
 }
-function getCommitData (weeks) {
+function getCommitData(weeks = '40') {
   const _cmd = `git log --since="${weeks}.weeks" --date=iso --pretty=format:"%ad"`
   const _gitLog = execSync(_cmd).toString()
   const gitlogData = _gitLog.split('\n').map(e => {

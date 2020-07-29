@@ -39,6 +39,10 @@ cnpm i hexo-calendar -S
 {% endcalendar %}
 ```
 
+### 如果你使用了自动部署
+
+如果你使用了`Travis CI`, `Github Action`之类的自动部署，那么你需要在推送源码之前使用`hexo gc -w=40`命令生成一个`calendar.json`文件。`-w=40`代表显示 40 周之前至今的活动记录。
+
 ## 选项
 
 | 名称 | 类型 | 默认值 | 描述 |
