@@ -2,6 +2,8 @@ Insert a calendar like Github contributions into your blog.
 
 [中文文档](https://github.com/HCLonely/hexo-calendar/blob/master/README_CN.md)
 
+> Note: This plugin will conflict with the `hexo g` command, please use `hexo ge` or `hexo generate` instead of the `hexo g` command!
+
 ## Precondition
 
 > Note: The plugin cannot be used if the prerequisites are not met, and the problems of installing this plugin when the prerequisites are not met will not be dealt with, and how to achieve the following prerequisites will not be dealt with!
