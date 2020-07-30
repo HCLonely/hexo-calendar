@@ -17,14 +17,19 @@ hexo.extend.tag.register('calendar', function (args, content) {
 }, { ends: true })
 
 hexo.extend.console.register('gc', 'Generate calendar.json', function (args) {
+  const date = new Date()
+  const formatedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
+  const commitData = getCommitData(args.w)
+  console.log(commitData)
+  commitData[formatedDate] = commitData[formatedDate] ? (commitData[formatedDate] + 1) : 1
   const dataDir = path.join(this.source_dir, '_data')
   if (!fs.existsSync(dataDir)) {
     log.info('Creat dir ' + dataDir)
     fs.mkdirsSync(dataDir)
   }
-  fs.writeFile(path.join(dataDir, 'calendar.json'), getCommitData(args.w), err => {
+  fs.writeFile(path.join(dataDir, 'calendar.json'), JSON.stringify(commitData), err => {
     if (err) {
-      log.error('Failed to write data to calendar.json')
+      log.info('Failed to write data to calendar.json')
       console.error(err)
     } else {
       log.info('calendar.json has been saved')
@@ -32,13 +37,13 @@ hexo.extend.console.register('gc', 'Generate calendar.json', function (args) {
   })
 })
 
-function generateChart(options) {
+function generateChart (options) {
   const { width, height, id, monthLang, dayLang, weeks, title, insertScript } = Object.assign({ width: '600', height: '165', id: 'calendar', monthLang: 'en', dayLang: 'en', weeks: 40, title: 'Calendar', insertScript: true }, options)
   let commitData = '[]'
   if (fs.existsSync(path.join(hexo.source_dir, '_data/calendar.json'))) {
     commitData = fs.readFileSync(path.join(hexo.source_dir, '_data/calendar.json')).toString()
   } else {
-    commitData = getCommitData(weeks)
+    commitData = JSON.stringify(getCommitData(weeks))
   }
   return `
 <div style="width:100%;overflow-x:auto;overflow-y:hidden;">
@@ -141,7 +146,7 @@ function generateChart(options) {
   </script>
 `
 }
-function getCommitData(weeks = '40') {
+function getCommitData (weeks = '40') {
   const _cmd = `git log --since="${weeks}.weeks" --date=iso --pretty=format:"%ad"`
   const _gitLog = execSync(_cmd).toString()
   const gitlogData = _gitLog.split('\n').map(e => {
@@ -152,5 +157,5 @@ function getCommitData(weeks = '40') {
   for (const e of uniaueDate) {
     commitData[e] = counts(gitlogData, e)
   }
-  return JSON.stringify(commitData)
+  return commitData
 }
