@@ -49,8 +49,9 @@ function generateChart (options) {
 <div style="width:100%;overflow-x:auto;overflow-y:hidden;">
 <div id="${id}" style="width: ${width}px;height:${height}px;"></div>
 </div>
-  ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>' : ''}
-  <script type="text/javascript">
+${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>' : ''}
+<script type="text/javascript">
+  (function(){
     function dateFormat(date){
       date = new Date(date)
       return date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0')
@@ -143,7 +144,8 @@ function generateChart (options) {
     };
 
     calendarChart.setOption(option);
-  </script>
+  })();
+</script>
 `
 }
 function getCommitData (weeks = '40') {

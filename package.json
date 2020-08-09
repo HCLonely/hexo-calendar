@@ -1,6 +1,6 @@
 {
   "name": "hexo-calendar",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Insert a calendar like Github contributions into your hexo blog.",
   "keywords": [
     "helper",
