@@ -46,7 +46,7 @@ function generateChart (options) {
     commitData = JSON.stringify(getCommitData(weeks))
   }
   return `
-<div style="width:100%;overflow-x:auto;overflow-y:hidden;">
+<div id="${id}_box" style="width:100%;overflow-x:auto;overflow-y:hidden;">
 <div id="${id}" style="width: ${width}px;height:${height}px;"></div>
 </div>
 ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>' : ''}
@@ -144,6 +144,13 @@ ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/e
     };
 
     calendarChart.setOption(option);
+
+    let box = document.getElementById("${id}_box")
+    let child = document.getElementById("${id}")
+    window.addEventListener('load',function(){
+        box.scrollLeft = (child.clientWidth - box.clientWidth) / 2
+    })
+    
   })();
 </script>
 `
