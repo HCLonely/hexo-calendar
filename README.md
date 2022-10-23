@@ -59,6 +59,15 @@ If you use automatic deployment such as `Travis CI`, `Github Action`, then you n
 | weeks | `Number` | `40` | Show how many weeks ago to the present activity record |
 | title | `String` | `"calendar"` | Calendar title |
 | insertScript | `Boolean` | `true` | Whether to automatically insert the `echarts` library. If you have imported the `echarts` library globally, please set this to `false`; if your site has `pjax` enabled, please set this to `false` and reference the `echarts` library globally. |
+| color | `Object` | `null` | Color options |
+| color.background | `String` | `"#f9f9f9"` | Background color |
+| color.tooltip.background | `String` | `"#555"` | Tooltip's background color |
+| color.tooltip.border | `String` | `"#777"` | Tooltip's border color |
+| color.visualMap.inRange | `String` | `'["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]'` | The colors displayed for different times of submission |
+| color.calendar.itemBorder | `String` | `"#fff"` | The border color for each data point |
+| color.calendar.monthLabel | `String` | `"#3C4858"` | Month label color |
+| color.calendar.dayLabel | `String` | `"#3C4858"` | Day label color |
+| color.calendar.name | `String` | `"#3C4858"` | None |
 
 ## Example
 

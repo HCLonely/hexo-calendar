@@ -57,6 +57,15 @@ cnpm i hexo-calendar -S
 | weeks | `Number` | `40` | 显示多少周之前至今的活动记录 |
 | title | `String` | `"calendar"` | 日历标题 |
 | insertScript | `Boolean` | `true` | 是否自动插入`echarts`库。如果你已全局引入`echarts`库，请将此项设为`false`；如果你的站点启用了`pjax`，请将此项设为`false`，并全局引用`echarts`库。 |
+| color | `Object` | `null` | 颜色选项 |
+| color.background | `String` | `"#f9f9f9"` | 背景颜色 |
+| color.tooltip.background | `String` | `"#555"` | 提示框背景颜色 |
+| color.tooltip.border | `String` | `"#777"` | 提示框边框颜色 |
+| color.visualMap.inRange | `String` | `'["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]'` | 不同提交次数显示的颜色 |
+| color.calendar.itemBorder | `String` | `"#fff"` | 每个数据点的边框颜色 |
+| color.calendar.monthLabel | `String` | `"#3C4858"` | 月份颜色 |
+| color.calendar.dayLabel | `String` | `"#3C4858"` | 日期颜色 |
+| color.calendar.name | `String` | `"#3C4858"` | 无 |
 
 ## 示例
 
