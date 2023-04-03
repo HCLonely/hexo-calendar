@@ -95,7 +95,7 @@ ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/e
         calculable: !1,
         inRange: {
           symbol: "rect",
-          color: "${color.visualMap.inRange || '["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]'}"
+          color: ${color.visualMap.inRange || '["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]'}
         },
         itemWidth: 12,
         itemHeight: 12,
