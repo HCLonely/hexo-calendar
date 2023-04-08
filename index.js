@@ -38,7 +38,34 @@ hexo.extend.console.register('gc', 'Generate calendar.json', function (args) {
 })
 
 function generateChart (options) {
-  const { width, height, id, monthLang, dayLang, weeks, title, insertScript, color } = Object.assign({ width: '600', height: '165', id: 'calendar', monthLang: 'en', dayLang: 'en', weeks: 40, title: 'Calendar', insertScript: true }, options)
+  const defaultOptions = {
+    width: '600',
+    height: '165',
+    id: 'calendar',
+    monthLang: 'en',
+    dayLang: 'en',
+    weeks: 40,
+    title: 'Calendar',
+    insertScript: true,
+    color: {
+      "background": "#f9f9f9",
+      "tooltip": {
+        "background": "#555",
+        "border": "#777"
+      },
+      "visualMap": {
+        "inRange": '["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]'
+      },
+      "calendar": {
+        "name": "#3C4858",
+        "itemBorder": "#fff",
+        "monthLabel": "#3C4858",
+        "dayLabel": "#3C4858"
+      }
+    }
+  };
+
+  const { width, height, id, monthLang, dayLang, weeks, title, insertScript, color } = Object.assign(defaultOptions, options)
   let commitData = '[]'
   if (fs.existsSync(path.join(hexo.source_dir, '_data/calendar.json'))) {
     commitData = fs.readFileSync(path.join(hexo.source_dir, '_data/calendar.json')).toString()
@@ -76,11 +103,11 @@ ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/e
         text: "${title}",
         x: "center"
       },
-      backgroundColor: "${color.background || "#f9f9f9"}",
+      backgroundColor: "${color.background}",
       tooltip: {
         padding: 10,
-        backgroundColor: "${color.tooltip.background || "#555"}",
-        borderColor: "${color.tooltip.border || "#777"}",
+        backgroundColor: "${color.tooltip.background}",
+        borderColor: "${color.tooltip.border}",
         borderWidth: 1,
         formatter: function(a) {
           var b = a.value;
@@ -95,7 +122,7 @@ ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/e
         calculable: !1,
         inRange: {
           symbol: "rect",
-          color: ${color.visualMap.inRange || '["#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"]'}
+          color: ${color.visualMap.inRange}
         },
         itemWidth: 12,
         itemHeight: 12,
@@ -113,11 +140,11 @@ ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/e
         },
         name: {
           textStyle: {
-            color: "${color.calendar.name || "#3C4858"}"
+            color: "${color.calendar.name}"
           }
         },
         itemStyle: {
-          borderColor: "${color.calendar.itemBorder || "#fff"}",
+          borderColor: "${color.calendar.itemBorder}",
           borderWidth: 2
         },
         yearLabel: {
@@ -126,13 +153,13 @@ ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/e
         monthLabel: {
           nameMap: ${typeof monthLang === 'string' ? `"${monthLang}"` : JSON.stringify(monthLang)},
           fontSize: 11,
-          color: "${color.calendar.monthLabel || "#3C4858"}"
+          color: "${color.calendar.monthLabel}"
         },
         dayLabel: {
           formatter: "{start} 1st",
           nameMap: ${typeof dayLang === 'string' ? `"${dayLang}"` : JSON.stringify(dayLang)},
           fontSize: 11,
-          color: "${color.calendar.dayLabel || "#3C4858"}"
+          color: "${color.calendar.dayLabel}"
         }
       }],
       series: [{
