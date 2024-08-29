@@ -39,8 +39,8 @@ hexo.extend.console.register('gc', 'Generate calendar.json', function (args) {
 
 function generateChart (options) {
   const defaultOptions = {
-    width: '600',
-    height: '165',
+    width: '100%',
+    height: '185px',
     id: 'calendar',
     monthLang: 'en',
     dayLang: 'en',
@@ -74,7 +74,7 @@ function generateChart (options) {
   }
   return `
 <div id="${id}_box" style="width:100%;overflow-x:auto;overflow-y:hidden;">
-<div id="${id}" style="width: ${width}px;height:${height}px;"></div>
+<div id="${id}" style="width: ${width};height:${height};"></div>
 </div>
 ${insertScript ? '<script src="https://cdn.jsdelivr.net/npm/echarts@4.8.0/dist/echarts.min.js"></script>' : ''}
 <script type="text/javascript">
