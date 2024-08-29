@@ -51,8 +51,8 @@ If you use automatic deployment such as `Travis CI`, `Github Action`, then you n
 
 | Name | Type | Default value | Description |
 | :-----: | :-----: | :-----: | :-----: |
-| width | `String` | `"600"` | Calendar width, unit: `px` |
-| height | `String` | `"185"` | Calendar height, unit: `px` |
+| width | `String` | `"100%"` | Calendar width, e.g.: "width": "90%", "width": "600px" (with unit `px`), prefer to use percentage format |
+| height | `String` | `"185px"` | Calendar height, e.g.: "height": "185px"(with unit `px`), do not use percentage format |
 | id | `String` | `"calendar"` | Calendar element id |
 | monthLang | `String` or `Array` | `"en"` | Month language, optional: `en`, `cn` or [custom](https://echarts.apache.org/en/option.html#calendar.monthLabel.nameMap) |
 | dayLang | `String` or `Array` | `"en"` | Language for every day of the week, optional: `en`, `cn` or [custom](https://echarts.apache.org/en/option.html#calendar.dayLabel.nameMap) |
