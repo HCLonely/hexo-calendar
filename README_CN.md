@@ -49,7 +49,7 @@ cnpm i hexo-calendar -S
 
 | 名称 | 类型 | 默认值 | 描述 |
 | :-----: | :-----: | :-----: | :-----: |
-| width | `String` | `"100%"` | 日历宽度，可以设置，如: "width":"90%", "width":"600px"(必须带单位px)，建议使用百分比格式 |
+| width | `String` | `"100%"` | 日历宽度，可以设置如: "width":"90%", "width":"600px"(必须带单位`px`)，建议使用百分比格式 |
 | height | `String` | `"185px"` | 日历高度，可以设置如："height":"185px",不建议使用百分比格式 |
 | id | `String` | `"calendar"` | 日历元素 id |
 | monthLang | `String` or `Array` | `"en"` | 月份语言，可选：`en`, `cn`或[自定义](https://echarts.apache.org/zh/option.html#calendar.monthLabel.nameMap) |
