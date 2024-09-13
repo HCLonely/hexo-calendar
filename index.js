@@ -1,10 +1,14 @@
 const { execSync } = require('child_process')
 const fs = require('hexo-fs')
 const path = require('path')
-const log = require('hexo-log')({
+const hexoLog = require('hexo-log');
+const log = typeof hexoLog.default === 'function' ? hexoLog.default({
   debug: false,
   silent: false
-})
+}) : hexoLog({
+  debug: false,
+  silent: false
+});
 
 const counts = (arr, value) => arr.reduce((a, v) => v === value ? a + 1 : a + 0, 0)
 
